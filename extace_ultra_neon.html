@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXTACE — Digital Reality</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#030712;
+--bg2:#071126;
+--blue:#2563eb;
+--cyan:#00e5ff;
+--purple:#7c3aed;
+--pink:#ff008c;
+--white:#dbeafe;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Space Mono',monospace;
+background:#020617;
+overflow-x:hidden;
+color:var(--white);
+}
+
+/* fluid animated background */
+
+.bg{
+position:fixed;
+inset:0;
+z-index:-5;
+background:
+radial-gradient(circle at 20% 20%, rgba(0,229,255,.18), transparent 30%),
+radial-gradient(circle at 80% 30%, rgba(37,99,235,.18), transparent 35%),
+radial-gradient(circle at 50% 80%, rgba(124,58,237,.16), transparent 35%),
+linear-gradient(135deg,#020617,#071126,#020617);
+animation:movebg 18s ease infinite alternate;
+}
+
+@keyframes movebg{
+0%{
+filter:hue-rotate(0deg);
+transform:scale(1);
+}
+50%{
+transform:scale(1.05);
+}
+100%{
+filter:hue-rotate(35deg);
+transform:scale(1.1);
+}
+}
+
+.liquid{
+position:fixed;
+width:700px;
+height:700px;
+border-radius:50%;
+filter:blur(140px);
+opacity:.22;
+animation:float 12s ease-in-out infinite;
+mix-blend-mode:screen;
+}
+
+.l1{
+background:#00e5ff;
+top:-200px;
+left:-120px;
+}
+
+.l2{
+background:#7c3aed;
+bottom:-200px;
+right:-100px;
+animation-delay:4s;
+}
+
+.l3{
+background:#2563eb;
+top:40%;
+left:40%;
+animation-delay:2s;
+}
+
+@keyframes float{
+50%{
+transform:translateY(-40px) translateX(20px) scale(1.12);
+}
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:30px;
+position:relative;
+}
+
+.glass{
+width:100%;
+max-width:1100px;
+padding:70px 50px;
+border-radius:32px;
+background:rgba(3,7,18,.62);
+backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.08);
+box-shadow:
+0 0 40px rgba(0,229,255,.08),
+0 0 120px rgba(37,99,235,.12);
+position:relative;
+overflow:hidden;
+}
+
+.glass::before{
+content:'';
+position:absolute;
+inset:-2px;
+background:linear-gradient(90deg,#00e5ff,#2563eb,#7c3aed,#00e5ff);
+background-size:300% 100%;
+z-index:-1;
+filter:blur(20px);
+opacity:.4;
+animation:flow 10s linear infinite;
+}
+
+@keyframes flow{
+0%{background-position:0%;}
+100%{background-position:300%;}
+}
+
+.devmark{
+position:absolute;
+top:22px;
+right:25px;
+font-size:11px;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:#67e8f9;
+opacity:.7;
+}
+
+.title{
+font-family:'Orbitron',sans-serif;
+font-size:clamp(70px,15vw,200px);
+line-height:.88;
+font-weight:900;
+background:linear-gradient(90deg,#ffffff,#00e5ff,#7c3aed,#2563eb,#ffffff);
+background-size:300% auto;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:flow 7s linear infinite;
+text-shadow:0 0 35px rgba(0,229,255,.25);
+}
+
+.subtitle{
+margin-top:18px;
+font-size:clamp(13px,2vw,22px);
+letter-spacing:.35em;
+text-transform:uppercase;
+color:#93c5fd;
+}
+
+.text{
+margin-top:35px;
+max-width:700px;
+font-size:14px;
+line-height:2;
+color:#94a3b8;
+}
+
+.highlight{
+color:#00e5ff;
+}
+
+.buttons{
+margin-top:45px;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:16px 34px;
+border-radius:16px;
+text-decoration:none;
+color:white;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+transition:.4s;
+font-size:13px;
+letter-spacing:.18em;
+text-transform:uppercase;
+position:relative;
+overflow:hidden;
+}
+
+.btn::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(90deg,#00e5ff,#2563eb,#7c3aed);
+opacity:0;
+transition:.4s;
+}
+
+.btn span{
+position:relative;
+z-index:2;
+}
+
+.btn:hover{
+transform:translateY(-6px) scale(1.04);
+box-shadow:0 0 35px rgba(0,229,255,.35);
+}
+
+.btn:hover::before{
+opacity:1;
+}
+
+/* sections */
+
+section{
+padding:100px 24px;
+max-width:1200px;
+margin:auto;
+}
+
+.sec-title{
+font-family:'Orbitron',sans-serif;
+font-size:clamp(34px,6vw,60px);
+margin-bottom:50px;
+text-align:center;
+background:linear-gradient(90deg,#ffffff,#00e5ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.card{
+padding:35px;
+border-radius:28px;
+background:rgba(6,11,25,.65);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.06);
+transition:.45s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(124,58,237,.08));
+opacity:0;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px) rotateX(5deg) rotateY(5deg);
+box-shadow:0 0 40px rgba(0,229,255,.2);
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+.card h3{
+font-size:22px;
+margin-bottom:16px;
+color:#7dd3fc;
+}
+
+.card p{
+font-size:13px;
+line-height:1.9;
+color:#94a3b8;
+}
+
+.signature{
+margin-top:70px;
+text-align:center;
+font-size:12px;
+letter-spacing:.3em;
+text-transform:uppercase;
+color:#67e8f9;
+opacity:.6;
+}
+
+/* mobile */
+
+@media(max-width:768px){
+
+.glass{
+padding:45px 24px;
+border-radius:24px;
+}
+
+.title{
+font-size:76px;
+}
+
+.subtitle{
+font-size:12px;
+letter-spacing:.18em;
+}
+
+.text{
+font-size:12px;
+line-height:1.8;
+}
+
+.buttons{
+flex-direction:column;
+}
+
+.btn{
+width:100%;
+text-align:center;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- autoplay music -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8f6db0f6c.mp3?filename=future-bass-fashion-10954.mp3" type="audio/mpeg">
+</audio>
+
+<div class="bg"></div>
+
+<div class="liquid l1"></div>
+<div class="liquid l2"></div>
+<div class="liquid l3"></div>
+
+<section class="hero">
+
+<div class="glass">
+
+<div class="devmark">dev Extace</div>
+
+<div class="title">
+EXTACE
+</div>
+
+<div class="subtitle">
+digital reality / timur
+</div>
+
+<div class="text">
+<span class="highlight">IT • VPN • DESIGN • MUSIC</span><br><br>
+Тёмный цифровой мир с живыми переливами цвета, 
+неоновыми свечениями и атмосферой настоящего futuristic web design. 
+Минимализм, глубина и стиль — всё собрано в одном пространстве.
+</div>
+
+<div class="buttons">
+<a href="https://t.me/smwe3" target="_blank" class="btn"><span>Telegram</span></a>
+<a href="#skills" class="btn"><span>Explore</span></a>
+</div>
+
+</div>
+
+</section>
+
+<section id="skills">
+
+<div class="sec-title">Skills & Vision</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>💻 Development</h3>
+<p>Современный digital стиль, интерфейсы и создание уникальных веб‑пространств.</p>
+</div>
+
+<div class="card">
+<h3>🛡 VPN & Tech</h3>
+<p>Безопасность, технологии и работа с цифровыми экосистемами нового поколения.</p>
+</div>
+
+<div class="card">
+<h3>🎵 Music Vibes</h3>
+<p>Атмосфера музыки и кибер‑эстетика как часть визуального дизайна.</p>
+</div>
+
+<div class="card">
+<h3>🎨 Neon Design</h3>
+<p>Глубокие тёмные цвета, плавные переливы и премиальный футуристичный UI.</p>
+</div>
+
+</div>
+
+<div class="signature">
+created by dev Extace
+</div>
+
+</section>
+
+<script>
+
+// mouse reactive glow
+document.addEventListener('mousemove',(e)=>{
+document.querySelectorAll('.liquid').forEach((el,i)=>{
+const speed=(i+1)*0.008;
+el.style.transform=`translate(${e.clientX*speed}px, ${e.clientY*speed}px)`;
+});
+});
+
+</script>
+
+</body>
+</html>
